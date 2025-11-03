@@ -10,6 +10,17 @@
 - `docker run -d <image name>`: to run the conntainer in the detached mode
 - `docker run -d -P <image name>`: to run the container in the detached mode and map the service port to the available container port
 - `docker run -d -p 7080:80 nginx`: to run a container in the detached mode and map the specific available port of the container to the port on which the process/service is running, example nginx runs on port 80 and we mapped 7080 port. we can access nginx service via `<ip>:7080`.
+- `docker run -d -P -e MYSQL_ROOT_PASSWORD=my-secret-pw mysql:5.7`: -e tag is used to pass the export variables
 - `docker pull <image name>`: to pull an image from the container registry (remote)
-- `docker inspect <image name>`: to see the json information of the container - main is the config block where we have entry point and other service specific commands
+- `docker inspect <image name>/<container name/id>`: to see the json information of the image/container - main is the config block where we have entry point and other service specific commands, we can also find the port on which the process is running and volume path information.
 - `docker logs <container id / name>`: to check the logs and troubleshoot, we don't see the output to the cmd `docker run` in the console as in the backend entrypoint and other "service" specific commands are triggered which are mentioned in the config block of the inspect file. we can see the output of these commands using docker logs cmd.
+- `docker volume create <volume name>`: to create a new docker volume, stores data in the host machine at `/var/lib/docker/volumes/<volume name>/_data/`. in case the container gets removed, we can attach the volume to a new container preserving the data.
+- `docker volume ls`: to view all the available docker volumes
+
+## concepts
+
+- bind mount: it is used to inject data from the host machine to the container, usually developers code in the host machine and that gets synced to the container
+  - `docker run --name vprodb -d -e MYSQL_ROOT_PASSWORD=mypass -p 3030:3306 -v /home/ubuntu/vprodbdata:/var/lib/mysql mysql:5.7`: this is an example command to run a mysql container with bind mount.
+- volume mount: for preserving data, better option is volumes.
+  - `docker volume create mydbdata`: to create a volume with the name mydbdata
+  - `docker run --name vprodb -d -e MYSQL_ROOT_PASSWORD=mypass -p 3030:3306 -v mydbdata:/var/lib/mysql mysql:5.7`: we pass the volume name in place of the host bind mount path to attach a volume to the container directory.

@@ -18,6 +18,11 @@
 - `docker volume ls`: to view all the available docker volumes
 - `docker build -t <provide a new image name> <Dockerfile path>`: to create a new image fromt the Dockerfile
   - Example: `docker build -t titanimg .`
+- `docker compose up`: to build and run the `compose.yml` file and create the containers based on the definition, it will occupy the terminal, in case the service keeps running.
+- `docker compose ps`: to view the containers created by docker compose
+- `docker compose up -d`: run in detached mode, runs the service in the background.
+- `docker compose top`: shows the process PID, PPID.
+- `docker compose start`: assuming the services have already been created, a stopped compose can be started.
 
 ## concepts
 

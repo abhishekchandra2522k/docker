@@ -47,3 +47,12 @@
 - WORKDIR: sets the working directory
 - ARG: defines a variable that users can pass at build-time
 - ONBUILD: adds to the image a trigger instruction to be executed at a later time
+
+## docker images for our vprofile application
+
+- `mysql:8.0.33`
+- `memcache:latest`
+- `rabbitmq:latest`
+- `maven:3.9.9-eclipse-temurun-21-jammy`
+- `tomcat:10-jdk21`
+- `nginx:latest`
